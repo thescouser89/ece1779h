@@ -2,6 +2,7 @@ package ca.utoronto.ece1779.database;
 
 import ca.utoronto.ece1779.database.Image;
 import ca.utoronto.ece1779.database.User;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+@Ignore
 public class ImageTest {
 
     @Test

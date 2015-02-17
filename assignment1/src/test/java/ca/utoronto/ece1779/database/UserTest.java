@@ -1,10 +1,12 @@
 package ca.utoronto.ece1779.database;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import ca.utoronto.ece1779.database.User;
 
 import java.util.UUID;
 
+@Ignore
 public class UserTest {
 
     private static String userLogin = generateRandomString();
