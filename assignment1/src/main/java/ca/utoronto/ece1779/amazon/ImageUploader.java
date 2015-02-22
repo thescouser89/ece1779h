@@ -6,6 +6,7 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 
 import java.io.File;
@@ -57,4 +58,8 @@ public class ImageUploader {
         return s3Client.getObject(BUCKET, uuid).getObjectContent();
     }
 
+    public synchronized static void deleteAllFromBucket() {
+        s3Client.deleteBucket(BUCKET);
+        s3Client.createBucket(BUCKET);
+    }
 }

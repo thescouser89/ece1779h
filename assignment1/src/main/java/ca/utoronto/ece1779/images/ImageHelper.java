@@ -3,6 +3,7 @@ package ca.utoronto.ece1779.images;
 import ca.utoronto.ece1779.amazon.ImageUploader;
 import ca.utoronto.ece1779.database.Image;
 
+import java.io.InputStream;
 import java.util.UUID;
 
 public class ImageHelper {
@@ -11,6 +12,10 @@ public class ImageHelper {
     private String firstTransformationImage;
     private String secondTransformationImage;
     private String thirdTransformationImage;
+
+    public static InputStream getImage(String key) {
+        return ImageUploader.getImage(key);
+    }
 
     public ImageHelper(int userId, String originalImage) {
         this.userId = userId;

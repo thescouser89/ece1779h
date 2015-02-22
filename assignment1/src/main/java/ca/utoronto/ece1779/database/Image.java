@@ -229,6 +229,22 @@ public class Image {
         }
     }
 
+    public static boolean deleteAll() {
+        String delete = "Delete FROM images";
+        Connection con = DatabaseConnection.getInstance().getConnection();
+
+        try {
+            Statement stmt = con.createStatement();
+            stmt.execute(delete);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeConnection(con);
+        }
+    }
+
     private static void closeConnection(Connection con) {
         try {
             con.close();

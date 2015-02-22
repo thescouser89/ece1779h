@@ -191,6 +191,24 @@ public class User {
 
     }
 
+    public static boolean deleteAll() {
+        Connection con = DatabaseConnection.getInstance().getConnection();
+
+        String deleteAll = "Delete FROM users";
+
+        try {
+            Statement stmt = con.createStatement();
+            stmt.execute(deleteAll);
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeConnection(con);
+        }
+    }
+
     private static void closeConnection(Connection con) {
         try {
             con.close();
