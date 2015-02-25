@@ -6,8 +6,7 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.*;
 
 import java.io.File;
 import java.io.InputStream;
@@ -20,7 +19,6 @@ public class ImageUploader {
 
     private static final BasicAWSCredentials awsCreds = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
     private static final AmazonS3 s3Client = new AmazonS3Client(awsCreds);
-
     // Oregon region
     private static final Region usWest = Region.getRegion(Regions.US_WEST_2);
 
@@ -43,7 +41,7 @@ public class ImageUploader {
 
         try {
             if (s3Client.doesBucketExist(BUCKET)) {
-                s3Client.putObject(BUCKET, uuid, imageFile);
+                s3Client.putObject(new PutObjectRequest(BUCKET, uuid, imageFile).withCannedAcl(CannedAccessControlList.PublicRead));
                 return uuid;
             } else {
                 throw new RuntimeException("Bucket " + BUCKET + " does not exist");
