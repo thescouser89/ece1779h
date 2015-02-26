@@ -30,7 +30,7 @@ public class ImageHelper {
         ImageManipulation.hipsterFilter(originalImage, thirdTransformationImage);
     }
 
-    public Image uploadImagesToS3AndSaveToDatabase() {
+    public int uploadImagesToS3AndSaveToDatabase() {
         String oriKey = ImageUploader.uploadImage(originalImage);
         String frtKey = ImageUploader.uploadImage(firstTransformationImage);
         String scdKey = ImageUploader.uploadImage(secondTransformationImage);
@@ -38,7 +38,8 @@ public class ImageHelper {
 
         Image image = new Image(userId, oriKey, frtKey, scdKey, thdKey);
         Image.addImage(image);
-        return image;
+        return Image.findIdOfImage(image);
+        // return image;
     }
 
     private String getRandomUUID() {
