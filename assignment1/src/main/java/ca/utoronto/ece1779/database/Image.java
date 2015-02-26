@@ -116,6 +116,24 @@ public class Image {
         }
     }
 
+    public static int findIdOfImage(Image newImage) {
+        int userId = newImage.getUserId();
+        String originalImage = newImage.getOriginalImage();
+        String firstTransformation = newImage.getFirstTransformation();
+        String secondTransformation = newImage.getSecondTransformation();
+        String thirdTransformation = newImage.getThirdTransformation();
+
+        List<Image> images = Image.findImagesWithUserId(userId);
+        for (Image image: images) {
+            if (image.getOriginalImage().equals(originalImage) &&
+                    image.getFirstTransformation().equals(firstTransformation) &&
+                    image.getSecondTransformation().equals(secondTransformation) &&
+                    image.getThirdTransformation().equals(thirdTransformation)) {
+                return image.getId();
+            }
+        }
+        return 0;
+    }
     public static List<Image> findImagesWithUserId(int userId) {
         Connection con = DatabaseConnection.getInstance().getConnection();
         String query = "SELECT * from images where userId = " + userId;
@@ -156,7 +174,7 @@ public class Image {
      * @param newImage: Image object
      * @return whether the save was successful or not.
      */
-    public static boolean addImage(Image newImage) {
+    public static int addImage(Image newImage) {
         Connection con = DatabaseConnection.getInstance().getConnection();
 
         String insert = "INSERT INTO images(id, userId, key1, key2, key3, key4) VALUES(?, ?, ?, ?, ?, ?);";
@@ -174,11 +192,13 @@ public class Image {
             ps.setString(6, newImage.getThirdTransformation());
 
             ps.execute();
-            return true;
+
+
+            return Image.findIdOfImage(newImage);
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return 0;
         } finally {
             closeConnection(con);
         }
