@@ -44,6 +44,10 @@
 			
 			// get root directory of web application, random file name
 			String path = this.getServletContext().getRealPath("/");        
+			File theDir = new File(path + "/temp_images");
+			if (!theDir.exists()) {
+			    theDir.mkdir();
+			}
 			String key1 = "/temp_images/MyObjectKey_" + UUID.randomUUID();
 			String filepath = path+key1;
 			
