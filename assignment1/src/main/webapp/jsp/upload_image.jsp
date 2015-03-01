@@ -11,15 +11,13 @@
 
 <%
 	// If not logged in, redirect to login
-	if (session.getAttribute("username") == null){
-		response.sendRedirect("login.jsp");
+	//if (session.getAttribute("username") == null){
+	//	response.sendRedirect("login.jsp");
+	//}
+	String username = "";
+	if (session.getAttribute("username") != null){
+		username = (String) session.getAttribute("username");
 	}
-	
-	// get root directory of web application, random file name
-	String patha = this.getServletContext().getRealPath("/");        
-	String key11 = "MyObjectKey_" + UUID.randomUUID();
-	String name11 = patha+key11;
-	out.println(name11);
 	
 	// If post request to upload
 	if ("POST".equalsIgnoreCase(request.getMethod())) {
@@ -49,15 +47,15 @@
 			String key1 = "/temp_images/MyObjectKey_" + UUID.randomUUID();
 			String filepath = path+key1;
 			
-			out.println(filepath);
 			
 			// store file in server
 			File file1 = new File(filepath); 
 			theFile.write(file1);
 			
-			String username = (String) session.getAttribute("username");
 			ImageHelper ih = new ImageHelper(User.findUser(username).getId(),filepath); 
-			Image im = ih.uploadImagesToS3AndSaveToDatabase();
+			int imageid = ih.uploadImagesToS3AndSaveToDatabase();
+			
+			response.sendRedirect("view_image.jsp?imageid="+imageid);
 			
 		} catch (Exception ex) {
 			out.println("something went wrong");

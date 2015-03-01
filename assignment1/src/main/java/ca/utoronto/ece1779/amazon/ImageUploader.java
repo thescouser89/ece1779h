@@ -1,7 +1,9 @@
 package ca.utoronto.ece1779.amazon;
 
 import com.amazonaws.AmazonClientException;
+import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
@@ -13,11 +15,15 @@ import java.io.InputStream;
 import java.util.UUID;
 
 public class ImageUploader {
-    private static final String ACCESS_KEY = "figure out yourself :)";
-    private static final String SECRET_KEY = "so so secret";
     private static final String BUCKET = "ece1779-group26";
+    private static final ProfileCredentialsProvider legit = new ProfileCredentialsProvider();
 
-    private static final BasicAWSCredentials awsCreds = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
+    private static final AWSCredentials accountID = legit.getCredentials();
+
+    private static final String AWSAccessKey = accountID.getAWSAccessKeyId();
+    private static final String AWSSecretKey = accountID.getAWSSecretKey();
+
+    private static final BasicAWSCredentials awsCreds = new BasicAWSCredentials(AWSAccessKey, AWSSecretKey);
     private static final AmazonS3 s3Client = new AmazonS3Client(awsCreds);
     // Oregon region
     private static final Region usWest = Region.getRegion(Regions.US_WEST_2);
