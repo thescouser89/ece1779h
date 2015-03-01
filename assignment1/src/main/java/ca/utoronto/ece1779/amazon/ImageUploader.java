@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.util.UUID;
 
 public class ImageUploader {
-    private static final String BUCKET = "ece1779-group26";
+    public static final String BUCKET = "ece1779-group26";
     private static final ProfileCredentialsProvider legit = new ProfileCredentialsProvider();
 
     private static final AWSCredentials accountID = legit.getCredentials();

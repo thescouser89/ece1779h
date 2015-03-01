@@ -44,7 +44,7 @@
 		<%
 			if (session.getAttribute("username") != null)
 			for (Image im : Image.findImagesWithUserId(User.findUser(username).getId())){
-				out.println("<a href='/ece1779/jsp/view_image.jsp?imageid="+im.getId()+"'><img style='max-width:100px;max-height:75px;float:left;' src='http://<%= bucket %>.s3-us-west-2.amazonaws.com/"+im.getOriginalImage()+"' /></a>");
+				out.println("<a href='/ece1779/jsp/view_image.jsp?imageid="+im.getId()+"'><img style='max-width:100px;max-height:75px;float:left;' src='http://" + bucket + ".s3-us-west-2.amazonaws.com/"+im.getOriginalImage()+"' /></a>");
 			}
 		%>
 			
