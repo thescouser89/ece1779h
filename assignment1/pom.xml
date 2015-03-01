@@ -14,7 +14,7 @@
         <maven.compiler.target>1.6</maven.compiler.target>
     </properties>
     <build>
-        <finalName>ece1779h</finalName>
+        <finalName>ece1779</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
