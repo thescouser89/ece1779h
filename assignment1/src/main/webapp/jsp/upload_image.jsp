@@ -59,7 +59,7 @@
 			ImageHelper ih = new ImageHelper(User.findUser(username).getId(),filepath); 
 			int imageid = ih.uploadImagesToS3AndSaveToDatabase();
 			
-			response.sendRedirect("view_image.jsp?imageid="+imageid);
+			response.sendRedirect("/ece1779/jsp/view_image.jsp?imageid="+imageid);
 			
 		} catch (Exception ex) {
 			out.println("something went wrong");
@@ -80,11 +80,11 @@
 		</script>
 	</head>
 
-	<jsp:include page="includes/header.jsp" />
+	<jsp:include page="/jsp/includes/header.jsp" />
 	
 	<body>
     <h1>Upload Image</h1>
-    <form action="/ece1779/jsp/upload_image.jsp"  enctype="multipart/form-data" method="post">
+    <form action="/ece1779/servlet/FileUpload"  enctype="multipart/form-data" method="post">
 		User ID <input type="text" name="userID" value="${username}"><br />
 		What is the image files to upload? <input type="file" name="theFile"><br />
 		<input type="submit" value="Send">
