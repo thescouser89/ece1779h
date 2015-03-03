@@ -7,8 +7,8 @@
         A scriptable management web application for the Tomcat Web Server;
         Manager lets you view, load/unload/etc particular web applications.
     </description>
-    <display-name>CSC309 Examples</display-name>
-    <description>CSC309 Examples.</description>
+    <display-name>ECE1779H User UI</display-name>
+    <description>ECE1779H User UI</description>
     <!--
      Define servlets that are included in the example application
     -->
@@ -22,6 +22,6 @@
 	<!--mapping-->
 	<servlet-mapping>
 		<servlet-name>upload_image</servlet-name>
-		<url-pattern>/ece1779/servlet/FileUpload</url-pattern>   
+		<url-pattern>/servlet/FileUpload</url-pattern>   
 	</servlet-mapping>
 </web-app>
