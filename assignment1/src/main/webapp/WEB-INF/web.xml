@@ -14,4 +14,14 @@
     -->
     <servlet>
     </servlet>
+	
+	<servlet>
+    <servlet-name>upload_image</servlet-name>
+    <jsp-file>/jsp/upload_image.jsp</jsp-file>
+	</servlet>
+	<!--mapping-->
+	<servlet-mapping>
+		<servlet-name>upload_image</servlet-name>
+		<url-pattern>/ece1779/servlet/FileUpload</url-pattern>   
+	</servlet-mapping>
 </web-app>
