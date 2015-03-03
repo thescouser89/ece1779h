@@ -7,7 +7,7 @@
 	if (session.getAttribute("username") == null){
 		response.sendRedirect("login.jsp");
 	}
-	
+
 	String imageidstr = request.getParameter("imageid");
 	int imageid = Integer.parseInt(imageidstr);
 	// Get the image
@@ -33,17 +33,19 @@
 	<head>
 		<title>My Images</title>
 		<meta charset="utf-8">
-		<script>
-		</script>
+    	<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	</head>
 
 	<jsp:include page="includes/header.jsp" />
-	
+
 	<body>
 
     <div>
       <h1>Image <%= imageidstr %></h1>
-    </div> 
+    </div>
 
 	<div style="width:500px;padding:0px;">
 		<table>
@@ -71,11 +73,11 @@
 			<tr>
 				<td><img style="max-width:300px;max-height:225px;float:left;" src="http://<%= bucket %>.s3-us-west-2.amazonaws.com/<%= key3 %>" /></td>
 			</tr>
-			
+
 		</table>
-		
+
 	</div>
-	
+
 	</body>
 
 </html>

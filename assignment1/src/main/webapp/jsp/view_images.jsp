@@ -7,15 +7,15 @@
 	if (session.getAttribute("username") == null){
 		response.sendRedirect("login.jsp");
 	}
-	
+
 	// Get user's images
 	String username = (String) session.getAttribute("username");
 	//for (Image im : Image.findImagesWithUserId(User.findUser(username).getId())){
 	//	out.println(im.getOriginalImage());
 	//}
-	
+
 	String bucket = ImageUploader.BUCKET;
-	
+
 %>
 
 <!DOCTYPE html>
@@ -23,36 +23,38 @@
 	<head>
 		<title>My Images</title>
 		<meta charset="utf-8">
-		<script>
-		</script>
+    	<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	</head>
 
 	<jsp:include page="includes/header.jsp" />
-	
+
 	<body>
 
     <div>
       <h1>My Images</h1>
-    </div> 
+    </div>
 
 	<div style="width:500px;padding:0px;">
 		<!--%
 			for (int i=0; i < imageArray.length; i++)
 			{
 		%-->
-		
+
 		<%
 			if (session.getAttribute("username") != null)
 			for (Image im : Image.findImagesWithUserId(User.findUser(username).getId())){
 				out.println("<a href='/ece1779/jsp/view_image.jsp?imageid="+im.getId()+"'><img style='max-width:100px;max-height:75px;float:left;' src='http://" + bucket + ".s3-us-west-2.amazonaws.com/"+im.getOriginalImage()+"' /></a>");
 			}
 		%>
-			
+
 		<!--%
 			}
 		%-->
 	</div>
-	
+
 	</body>
 
 </html>

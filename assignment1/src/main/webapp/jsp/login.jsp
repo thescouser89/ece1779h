@@ -4,6 +4,7 @@
 	// If already logged in, redirect to view_images
 	if (session.getAttribute("username") != null){
 		response.sendRedirect("view_images.jsp");
+		return;
 	}
 
 	// Check for parameters, if avail, log them in
@@ -13,13 +14,14 @@
 		password != null){
 		User usr = User.findUser(username);
 		if (usr == null){
-			out.println("USER NOT FOUND");
+			out.println("<div class=\"alert alert-danger\" role=\"alert\">User Not Found!</div>");
 		} else {
 			if (!usr.getPassword().equals(password)){
-				out.println("INCORRECT PASSWORD");
+				out.println("<div class=\"alert alert-danger\" role=\"alert\">Incorrect Password</div>");
 			} else {
 				session.setAttribute("username",username);
 				response.sendRedirect("view_images.jsp");
+				return;
 			}
 		}
 	}
@@ -32,33 +34,26 @@
 		<title>Welcome! Please login.</title>
 		<meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
 		<meta charset="utf-8">
-		<script>
-		</script>
+        <!-- Custom styles for this template -->
+        <link href="../css/signin.css" rel="stylesheet">
+		<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	</head>
 
 	<body>
+        <div class="container">
+            <form class="form-signin" name="sign_in_form" action="/ece1779/jsp/login.jsp" method="post">
+              <h1 class="form-signin-heading">ECE1779 A1</h1>
+              <h2 class="form-signin-heading">Please login or</br><a href="/ece1779/jsp/createaccount.jsp">create an account</a>.</h2>
 
-    <div>
-      <h1>ECE1779 Project 1 - Welcome!</h1>
-      <h2>Please login or <a href="/ece1779/jsp/createaccount.jsp">create an account</a>.</h2> 
-    </div> 
-
-	<form name="sign_in_form" action="/ece1779/jsp/login.jsp" method="post">
-		<table>
-			<tr>
-				<td><label>Username</label></td>
-				<td><input type="text" name="username"/></td>
-			</tr>
-			<tr>
-				<td><label>Password</label></td>
-				<td><input type="password" name="password"/></td>
-			</tr>
-			<tr>
-				<td colspan=2><input type="submit" value="Login" /></td>
-			</tr>
-		</table>
-	</form>
-	
+              <label for="username" class="sr-only">Username</label>
+              <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+              <label for="inputPassword" class="sr-only">Password</label>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            </form>
+        </div>
 	</body>
-
 </html>

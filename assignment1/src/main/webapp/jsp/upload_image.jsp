@@ -18,7 +18,7 @@
 	if (session.getAttribute("username") != null){
 		username = (String) session.getAttribute("username");
 	}
-	
+
 	// If post request to upload
 	if ("POST".equalsIgnoreCase(request.getMethod())) {
 		try {
@@ -28,9 +28,9 @@
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			// Parse the request
 			List /* FileItem */ items = upload.parseRequest(request);
-			
+
 			FileItem theFile = null;
-			
+
 			// Parse the request
             Iterator iter = items.iterator();
             while (iter.hasNext()) {
@@ -41,26 +41,26 @@
 					break;
                 }
             }
-			
+
 			// get root directory of web application, random file name
-			String path = this.getServletContext().getRealPath("/");        
+			String path = this.getServletContext().getRealPath("/");
 			File theDir = new File(path + "/temp_images");
 			if (!theDir.exists()) {
 			    theDir.mkdir();
 			}
 			String key1 = "/temp_images/MyObjectKey_" + UUID.randomUUID();
 			String filepath = path+key1;
-			
-			
+
+
 			// store file in server
-			File file1 = new File(filepath); 
+			File file1 = new File(filepath);
 			theFile.write(file1);
-			
-			ImageHelper ih = new ImageHelper(User.findUser(username).getId(),filepath); 
+
+			ImageHelper ih = new ImageHelper(User.findUser(username).getId(),filepath);
 			int imageid = ih.uploadImagesToS3AndSaveToDatabase();
-			
+
 			response.sendRedirect("/ece1779/jsp/view_image.jsp?imageid="+imageid);
-			
+
 		} catch (Exception ex) {
 			out.println("something went wrong");
 			throw new ServletException (ex);
@@ -76,12 +76,14 @@
 		<title>Upload Image</title>
 		<meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
 		<meta charset="utf-8">
-		<script>
-		</script>
+    	<!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	</head>
 
 	<jsp:include page="/jsp/includes/header.jsp" />
-	
+
 	<body>
     <h1>Upload Image</h1>
     <form action="/ece1779/servlet/FileUpload"  enctype="multipart/form-data" method="post">
