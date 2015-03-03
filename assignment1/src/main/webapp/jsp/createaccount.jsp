@@ -38,11 +38,11 @@
 		<meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
 		<meta charset="utf-8">
 		        <!-- Custom styles for this template -->
-        <link href="../css/signin.css" rel="stylesheet">
-        <link href="../css/sweet-alert.css" rel="stylesheet">
 		<!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <link href="../css/signin.css" rel="stylesheet">
+        <link href="../css/sweet-alert.css" rel="stylesheet">
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script src="../js/sweet-alert.min.js"></script>

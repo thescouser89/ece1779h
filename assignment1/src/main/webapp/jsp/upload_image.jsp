@@ -79,21 +79,29 @@
     	<!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-   		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <link href="../css/signin.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	</head>
 
 	<jsp:include page="/jsp/includes/header.jsp" />
 
 	<body>
-    <h1>Upload Image</h1>
-    <form action="/ece1779/servlet/FileUpload"  enctype="multipart/form-data" method="post">
-		User ID <input type="text" name="userID" value="${username}"><br />
-		What is the image files to upload? <input type="file" name="theFile"><br />
-		<input type="submit" value="Send">
-		<input type="reset">
-    </form>
+	<div class="container">
+            <!-- Display filename inside the button instead of its label -->
+        <form class="form-signin" action="/ece1779/servlet/FileUpload"  enctype="multipart/form-data" method="post">
+            <h1 class="form-signin-heading">Upload Image</h1>
+            <input type="hidden" name="userID" value="${username}"><br />
 
+            <label id="label_file" class="btn btn-default btn-lg btn-block" for="my-file-selector">
+                <input id="my-file-selector" type="file" name="theFile" style="display:none;" onchange="$(this).parent().parent().parent().find('#label_file_replace').text($(this).val());">
+                <span id="label_file_replace">Browse</span>
+            </label>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Upload Image</button>
+            <button class="btn btn-lg btn-danger btn-block" type="reset" onclick="$('#label_file_replace').text('Browse');">Reset</button>
+        </form>
+    </div>
   </body>
 
 </html>
