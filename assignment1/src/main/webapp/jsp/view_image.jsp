@@ -10,6 +10,7 @@
 	String key1 = "";
 	String key2 = "";
 	String key3 = "";
+        String bucket = ImageUploader.BUCKET;
 	for (Image im : Image.getAllImages()){
 		if (im.getId() == imageid){
 			key0 = im.getOriginalImage();
