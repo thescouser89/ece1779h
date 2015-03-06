@@ -3,21 +3,14 @@
 <%@ page import="ca.utoronto.ece1779.database.User" %>
 
 <%
-	// If not logged in, redirect to login
-	if (session.getAttribute("username") == null){
-		response.sendRedirect("login.jsp");
-	}
-
 	String imageidstr = request.getParameter("imageid");
 	int imageid = Integer.parseInt(imageidstr);
 	// Get the image
-	String username = (String) session.getAttribute("username");
 	String key0 = "";
 	String key1 = "";
 	String key2 = "";
 	String key3 = "";
-	String bucket = ImageUploader.BUCKET;
-	for (Image im : Image.findImagesWithUserId(User.findUser(username).getId())){
+	for (Image im : Image.getAllImages()){
 		if (im.getId() == imageid){
 			key0 = im.getOriginalImage();
 			key1 = im.getFirstTransformation();
