@@ -24,13 +24,8 @@ public class ImageUploader {
     private static final String AWSSecretKey = accountID.getAWSSecretKey();
 
     private static final BasicAWSCredentials awsCreds = new BasicAWSCredentials(AWSAccessKey, AWSSecretKey);
-    private static final AmazonS3 s3Client = new AmazonS3Client(awsCreds);
     // Oregon region
     private static final Region usWest = Region.getRegion(Regions.US_WEST_2);
-
-    static {
-        s3Client.setRegion(usWest);
-    }
 
     /**
      * Save an image into S3 bucket.
@@ -39,6 +34,8 @@ public class ImageUploader {
      * @return the key where the image was saved on S3
      */
     public static String uploadImage(String image) {
+        AmazonS3 s3Client = new AmazonS3Client(awsCreds);
+        s3Client.setRegion(usWest);
         File imageFile = new File(image);
         if (!imageFile.exists()) {
             throw new RuntimeException("Image " + image + " does not exist");
@@ -59,10 +56,14 @@ public class ImageUploader {
     }
 
     public static InputStream getImage(String uuid) {
+        AmazonS3 s3Client = new AmazonS3Client(awsCreds);
+        s3Client.setRegion(usWest);
         return s3Client.getObject(BUCKET, uuid).getObjectContent();
     }
 
     public synchronized static void deleteAllFromBucket() {
+        AmazonS3 s3Client = new AmazonS3Client(awsCreds);
+        s3Client.setRegion(usWest);
         s3Client.deleteBucket(BUCKET);
         s3Client.createBucket(BUCKET);
     }
